@@ -1,25 +1,3 @@
-<!-- <form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
-
-    <mat-dialog-content>
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Username" type="text" [(ngModel)]="user.username" name="username" #username="ngModel" required>
-          <mat-error *ngIf= "username.errors?.['required']">Username is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password" #password="ngModel" required>
-          <mat-error *ngIf= "password.errors?.['required']">Password is required</mat-error>
-        </mat-form-field>
-        <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
-      </p>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <span class="flex-spacer"></span>
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="loginForm.form.invalid">Login</button>
-    </mat-dialog-actions>
-</form> -->
-
 <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <label for="username">Username:</label>
     <input type="text" name="username" formControlName="username" required>
@@ -31,16 +9,17 @@
 
 <div class="login-container bg-image">
     <h1>Login</h1>
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" #fform="ngForm">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" [(ngModel)]="user.username" required>
+        <label for="username" style="font-family:' Verdana, Arial, Helvetica, sans-serif';">Username</label>
+        <input type="text" formControlName="username" placeholder="Username">
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)]="user.password" required>
+        <label for="password" style="font-family:' Verdana, Arial, Helvetica, sans-serif';">Password</label>
+        <input type="password" formControlName="password" placeholder="password">
       </div>
-      <button type="submit">Log In</button>
+      <button type="submit" [disabled]="loginForm.invalid">Log In</button><br>
+      <button class="new-user-button" (click)="redirectToSignUp()">New User</button>
     </form>
 </div>
   
