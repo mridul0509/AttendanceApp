@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
 
+## To run the project
+Pre-requisites: 
+* Angular requires an active [LTS or maintenance LTS version of Node.js](https://nodejs.org/en).
+* Install npm package manager
+  * This is mostly installed by default with nodejs. To check that you have the npm client installed, run npm -v in a terminal window.
+* Run the following commands:
+>npm install -g @angular/cli
+
+>npm install
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
