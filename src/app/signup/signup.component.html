@@ -1,0 +1,14 @@
+<div class="signup-container bg-image">
+    <h1>Sign Up</h1>
+    <form (ngSubmit)="onSubmit()" [formGroup]="signupForm" #fform="ngForm">
+      <div class="form-group">
+        <label for="username" style="font-family:' Verdana, Arial, Helvetica, sans-serif';">Username</label>
+        <input type="text" formControlName="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="password" style="font-family:' Verdana, Arial, Helvetica, sans-serif';">Password</label>
+        <input type="password" formControlName="password" placeholder="password">
+      </div>
+      <button type="submit" [disabled]="signupForm.invalid">Sign Up</button><br>
+    </form>
+</div>

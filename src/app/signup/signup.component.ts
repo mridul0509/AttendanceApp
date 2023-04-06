@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../services/login.service';
+import { SignupService } from '../services/signup.service';
 import { User } from '../shared/user';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
+
   user!: User;
-  loginForm!: FormGroup;
+  signupForm!: FormGroup;
   isFormSubmitted = false;
-  //constructor(public dialogRef: MatDialogRef<LoginComponent>) { }
-  constructor(private fb: FormBuilder, private loginService: LoginService,
+
+  constructor(private fb: FormBuilder, private signupService: SignupService,
     private router : Router) { }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
+    this.signupForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required]],
     });
   }
-  
+
   onSubmit() {
     this.isFormSubmitted = true;
-    this.user = this.loginForm.value;
+    this.user = this.signupForm.value;
     console.log('user', this.user);
-    this.loginService.login(this.user)
+    this.signupService.signup(this.user)
     .subscribe({
       next : (data: any) =>{
         console.log(data);
@@ -40,12 +41,9 @@ export class LoginComponent implements OnInit {
       error : (error: any) => {
         console.error(error)
         alert(error);
+        this.signupForm.reset();
       }
     });
-  }
-
-  redirectToSignUp() {
-    this.router.navigate(['/signup']);
   }
 
 }
