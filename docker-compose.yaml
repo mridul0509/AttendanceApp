@@ -1,0 +1,51 @@
+version: '3.9'
+services:
+  # Add the Node.js backend service
+  nodejs_backend:
+    build:
+      context: ./backend-service
+      dockerfile: Dockerfile
+    container_name: backend-container
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./backend-service:/app
+      - ./backend-service/node_modules:/app/node_modules
+      - app_data_public:/app/public
+    links:
+      - mongo
+    #networks:
+    #  - node-webapp-network
+  # Add the Angular frontend service
+  angular_frontend:
+    build:
+      context: ./frontend-angular
+      dockerfile: Dockerfile
+    container_name: frontend-container
+    volumes:
+      - ./frontend-angular:/app
+      - app_data_public:/app/dist/attendance-app
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    #networks:
+    #  - node-webapp-network
+  # Add the MongoDB service
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+    #environment:
+      #- MONGO_INITDB_ROOT_USERNAME=app_user
+      #- MONGO_INITDB_ROOT_PASSWORD=app_password
+      # - MONGO_INITDB_DATABASE=testAttendanceServer
+    #networks:
+    #  - node-webapp-network
+networks:
+  node-webapp-network:
+    driver: bridge
+volumes:
+  app_data_public:
