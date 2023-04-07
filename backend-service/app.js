@@ -10,7 +10,7 @@ var FileStore = require('session-file-store')(session);
 var passport = require('passport');
 var authenticate = require('./authenticate');
 
-const url = "mongodb://127.0.0.1:27017/testAttendanceServer";
+const url = "mongodb://mongo:27017/testAttendanceServer";
 const connect = mongoose.connect(url);
 
 connect.then((db) => {

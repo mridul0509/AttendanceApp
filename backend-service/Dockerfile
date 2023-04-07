@@ -1,5 +1,6 @@
 # Use the official Node.js runtime as a parent image
-FROM node:18-alpine
+FROM node:14.17.0
+
 
 # Set the working directory to /app
 WORKDIR /app
@@ -15,8 +16,8 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose port 3000 for the Express server
-EXPOSE 3000
+# Expose port 4000 for the Express server
+EXPOSE 4000
 
 # Start the Express server
-CMD ["node", "app.js"]
+CMD ["npm", "start"]
